@@ -10,10 +10,17 @@ import 'package:history_maker/src/screens/introduction/welcome.dart';
 import 'package:history_maker/src/screens/login/forgetPassword.dart';
 import 'package:history_maker/src/screens/login/loginPage.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
+import 'package:history_maker/src/screens/main/DiscoverPage.dart';
+import 'package:history_maker/src/screens/main/more/BlogPage.dart';
+import 'package:history_maker/src/screens/main/more/HelpPage.dart';
+import 'package:history_maker/src/screens/main/more/ProfilePage.dart';
+import 'package:history_maker/src/screens/main/more/TermsPage.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 import 'package:history_maker/src/util/constants.dart' as Constants;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'src/screens/main/more/profile/NamePage.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -27,7 +34,18 @@ void main() {
       '/BluetoothScreen': (BuildContext context) => new bluetooth(),
       '/LoginScreen': (BuildContext context) => new LoginPage(),
       '/SignupScreen': (BuildContext context) => new SignUpPage(),
-      '/ForgetPassScreen': (BuildContext context) => new forgetPassword()
+      '/ForgetPassScreen': (BuildContext context) => new forgetPassword(),
+      '/DiscoverScreen': (BuildContext context) => new DiscoverPage(),
+      '/ProfileScreen': (BuildContext context) => new ProfilePage(),
+      '/BlogScreen': (BuildContext context) => new BlogPage(),
+      '/HelpScreen': (BuildContext context) => new HelpPage(),
+      '/TermsScreen': (BuildContext context) => new TermsPage(),
+      '/NameScreen': (BuildContext context) => new NamePage(),
+      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      //'/TermsScreen': (BuildContext context) => new TermsPage(),
     },
   ));
 }
@@ -53,9 +71,13 @@ class _SplashScreenState extends State {
     var value = await preferencesHelper.getShowIntroductionScreens();
     print("value=$value");
     if(value == true){
-      Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
-    }else{
+      //Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
+      //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
       Navigator.of(context).pushReplacementNamed('/LoginScreen');
+    }else{
+      //Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
+      Navigator.of(context).pushReplacementNamed('/LoginScreen');
+      //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
     }
   }
 

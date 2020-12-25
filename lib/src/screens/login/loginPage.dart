@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
           http.Response response = await loginUser(user);
           print(response);
           print(response.statusCode);
-          print(response.toString());
+          print(response.body);
           if(response.statusCode == 400){
             return await showDialog(
               context: context,
@@ -87,8 +87,9 @@ class _LoginPageState extends State<LoginPage> {
               },
             );
           }else{
-            //Guardar datos del usuario
+            //TODO Guardar datos del usuario
             //Pasar a la siguiente pantalla
+            Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
           }
         }
       },

@@ -107,7 +107,7 @@ class _forgetPasswordState extends State<forgetPassword> {
         Text(
           'Ingrese el correo electrónico para recordar la contraseña',
           textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
+          //overflow: TextOverflow.ellipsis,
           style: TextStyle(),
         ),
         SizedBox(
