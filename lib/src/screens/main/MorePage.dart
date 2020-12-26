@@ -136,6 +136,17 @@ class _MorePageState extends State<MorePage> {
                     _ListViewWidget(),
                     SizedBox(height: height * .07),
                     _NewParKWidget(),
+                    Padding(
+                      // Izquierda, Arriba, Derecha, Abajo
+                      padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: Text(
+                        'Version 1.0.0',
+                        style: TextStyle(
+                            color: Colors.black45,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
                   ],
                 ),
               ),

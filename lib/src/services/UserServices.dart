@@ -58,3 +58,20 @@ Future<http.Response> postLogUser(User user) async {
     throw NetworkException();
   }
 }
+
+Future<http.Response> postChangeName(User user) async {
+  String url = Constants.apiBaseURL + Constants.postChangeName;
+  try {
+    final response = await http.post(
+      url,
+      body: json.encode(user.toJson()),
+      headers: {
+        HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+    return response;
+  } on IOException {
+    throw NetworkException();
+  }
+}

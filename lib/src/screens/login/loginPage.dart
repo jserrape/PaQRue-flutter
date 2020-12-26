@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:history_maker/src/model/User.dart';
+import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 import 'package:history_maker/src/util/constants.dart' as Constants;
 import 'package:history_maker/src/util/Visual.dart';
@@ -8,8 +11,6 @@ import 'package:http/http.dart' as http;
 import 'package:history_maker/src/services/UserServices.dart' as UserServices;
 
 import '../../Widget/bezierContainer.dart';
-import 'forgetPassword.dart';
-import 'signup.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -25,6 +26,13 @@ class _LoginPageState extends State<LoginPage> {
   final controllerEmail = TextEditingController();
   final controllerPassword = TextEditingController();
 
+  _saveUser(var jsonDecode) async {
+    SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
+    preferencesHelper.setUserLogIn(true);
+    preferencesHelper.setUserEmail(jsonDecode['email']);
+    preferencesHelper.setUserName(jsonDecode['nombre']);
+  }
+  
   Widget _entryField(TextEditingController controller, String title, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -72,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
             },
           );
         }else{
-          User user = new User(controllerEmail.text, controllerPassword.text, -1);
+          User user = new User(controllerEmail.text, "", controllerPassword.text, -1);
           http.Response response = await loginUser(user);
           print(response);
           print(response.statusCode);
@@ -87,7 +95,8 @@ class _LoginPageState extends State<LoginPage> {
               },
             );
           }else{
-            //TODO Guardar datos del usuario
+            //Guardar datos del usuario
+            _saveUser(jsonDecode((jsonDecode(response.body))['user']));
             //Pasar a la siguiente pantalla
             Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
           }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:history_maker/src/screens/introduction/location.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
+import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key, this.title}) : super(key: key);
@@ -13,7 +14,30 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
 
+  String _UserName = "";
+  String _UserEmail = "";
+
+  _ProfilePageState() {
+    SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
+    preferencesHelper.getUserName().then((val) =>
+        setState(() {
+          _UserName = val;
+        }));
+    preferencesHelper.getUserEmail().then((val) =>
+        setState(() {
+          _UserEmail = val;
+        }));
+  }
+
+  _unsaveUser() async {
+    SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
+    preferencesHelper.setUserLogIn(false);
+    preferencesHelper.setUserEmail(null);
+    preferencesHelper.setUserName(null);
+  }
+
   Widget _ListViewDetailsWidget() {
+
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -23,10 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/NameScreen');
+              Navigator.of(context).pushNamed('/NameScreen',arguments: _UserName);
             },
             title: Text('Nombre',style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Text('[null]'),
+            trailing: Text(_UserName),
           ),
         ),
         Divider(height: 0.1,color: Colors.black38),
@@ -37,18 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
               //Navigator.of(context).pushNamed('/BlogScreen');
             },
             title: Text('Email',style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Text('[null]'),
-          ),
-        ),
-        Divider(height: 0.1,color: Colors.black38),
-        Ink(
-          color: Colors.white,
-          child: ListTile(
-            onTap: () {
-              //Navigator.of(context).pushNamed('/TermsScreen');
-            },
-            title: Text('País',style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Text('[null]'),
+            trailing: Text(_UserEmail),
           ),
         ),
         Divider(height: 0.1,color: Colors.black38),
@@ -120,7 +133,12 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              //Navigator.of(context).pushNamed('/ProfileScreen');
+              _unsaveUser();
+              int count = 0;
+              Navigator.popUntil(context, (route) {
+                return count++ == 1;
+              });
+              Navigator.of(context).pushReplacementNamed('/LoginScreen');
             },
             title: Text('Cerrar sesión',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red[300])),
           ),
@@ -174,3 +192,4 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+

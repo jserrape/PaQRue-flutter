@@ -68,17 +68,30 @@ class _SplashScreenState extends State {
 
   void navigationPage() async{
     SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
-    var value = await preferencesHelper.getShowIntroductionScreens();
-    print("value=$value");
-    if(value == true){
-      //Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
-      //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
-      Navigator.of(context).pushReplacementNamed('/LoginScreen');
+
+    //TODO Comprobar conexión con el servidor
+
+    var loginUser = await preferencesHelper.getUserLogIn();
+    print("loginUser=$loginUser");
+    if(loginUser == true){
+      print("Usuario logeado");
+      Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
     }else{
-      //Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
-      Navigator.of(context).pushReplacementNamed('/LoginScreen');
-      //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
+      print("Usuario NO logeado");
+      var ShowIntroductionScreens = await preferencesHelper.getShowIntroductionScreens();
+      if(ShowIntroductionScreens == true){
+        print("Primera vez que entra");
+        Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
+        //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
+        //Navigator.of(context).pushReplacementNamed('/LoginScreen');
+      }else{
+        print("NO ES la primera vez que entra");
+        //Navigator.of(context).pushReplacementNamed('/WelcomeScreen');
+        Navigator.of(context).pushReplacementNamed('/LoginScreen');
+        //Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
+      }
     }
+
   }
 
   @override

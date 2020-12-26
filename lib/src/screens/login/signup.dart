@@ -20,6 +20,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
 
+  final controllerNombre = TextEditingController();
   final controllerEmail = TextEditingController();
   final controllerPassword = TextEditingController();
 
@@ -63,13 +64,14 @@ class _SignUpPageState extends State<SignUpPage> {
             .hasMatch(controllerEmail.text);
         bool passwordValid = controllerPassword.text.length > 5;
         if (emailValid && passwordValid) {
-          User user = new User(controllerEmail.text, controllerPassword.text, 0);
+          User user = new User(controllerEmail.text,controllerNombre.text.trim(), controllerPassword.text, 0);
           http.Response response = await addUser(user);
           String mensaje = "";
           if(response.statusCode == 201){
             mensaje = "Registro completo";
             controllerEmail.clear();
             controllerPassword.clear();
+            controllerNombre.clear();
           }else{
             mensaje = "Ya existe una cuenta con ese correo electrónico";
           }
@@ -165,8 +167,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField(controllerEmail, "Email"),
-        _entryField(controllerPassword, "Contraseña", isPassword: true),
+        _entryField(controllerNombre, "Nombre"),
+        _entryField(controllerEmail, "Email *"),
+        _entryField(controllerPassword, "Contraseña *", isPassword: true),
       ],
     );
   }
