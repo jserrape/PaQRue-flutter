@@ -75,3 +75,22 @@ Future<http.Response> postChangeName(User user) async {
     throw NetworkException();
   }
 }
+
+Future<http.Response> postChangeEmail(String initEmail, String finalEmail) async {
+  String url = Constants.apiBaseURL + Constants.postChangeEmail;
+
+  try {
+    final response = await http.post(
+      url,
+      body: json.encode({"initEmail": initEmail,
+                        "finalEmail": finalEmail}),
+      headers: {
+        HttpHeaders.acceptHeader: 'application/json',
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+    return response;
+  } on IOException {
+    throw NetworkException();
+  }
+}

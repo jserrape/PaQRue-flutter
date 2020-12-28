@@ -7,6 +7,7 @@ const appName = "PaQRue";
 const postUser = "/rest/usuario";
 const postChangePassword = "/rest/usuario/change_password";
 const postChangeName = "/rest/usuario/change_user_name";
+const postChangeEmail = "/rest/usuario/change_user_email";
 const postLogUser = "/rest/usuario/login";
 
 // Asset Constants

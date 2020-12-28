@@ -15,11 +15,13 @@ import 'package:history_maker/src/screens/main/more/BlogPage.dart';
 import 'package:history_maker/src/screens/main/more/HelpPage.dart';
 import 'package:history_maker/src/screens/main/more/ProfilePage.dart';
 import 'package:history_maker/src/screens/main/more/TermsPage.dart';
+import 'package:history_maker/src/screens/main/more/profile/LanguagePage.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 import 'package:history_maker/src/util/constants.dart' as Constants;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'src/screens/main/more/profile/EmailPage.dart';
 import 'src/screens/main/more/profile/NamePage.dart';
 
 void main() {
@@ -41,8 +43,8 @@ void main() {
       '/HelpScreen': (BuildContext context) => new HelpPage(),
       '/TermsScreen': (BuildContext context) => new TermsPage(),
       '/NameScreen': (BuildContext context) => new NamePage(),
-      //'/TermsScreen': (BuildContext context) => new TermsPage(),
-      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      '/EmailScreen': (BuildContext context) => new EmailPage(),
+      '/LanguageScreen': (BuildContext context) => new LanguagePage(),
       //'/TermsScreen': (BuildContext context) => new TermsPage(),
       //'/TermsScreen': (BuildContext context) => new TermsPage(),
       //'/TermsScreen': (BuildContext context) => new TermsPage(),
@@ -69,7 +71,9 @@ class _SplashScreenState extends State {
   void navigationPage() async{
     SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
 
-    //TODO Comprobar conexión con el servidor
+    //TODO Comprobar conexión con el servidor / despertar
+    //TODO Comprobar que la info almacenada del usuario es la misma del servidor
+    //TODO Comprobar idioma
 
     var loginUser = await preferencesHelper.getUserLogIn();
     print("loginUser=$loginUser");

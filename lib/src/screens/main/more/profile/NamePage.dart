@@ -47,6 +47,7 @@ class _NamePageState extends State<NamePage> {
     if(response.statusCode == 201){
       SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
       preferencesHelper.setUserName(_controller.text);
+      initialName = _controller.text;
       setState(() {
         checkVisible = false;
       });

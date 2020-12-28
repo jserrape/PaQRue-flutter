@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/NameScreen',arguments: _UserName);
+              Navigator.of(context).pushNamed('/NameScreen');
             },
             title: Text('Nombre',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Text(_UserName),
@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              //Navigator.of(context).pushNamed('/BlogScreen');
+              Navigator.of(context).pushNamed('/EmailScreen');
             },
             title: Text('Email',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Text(_UserEmail),
@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              //Navigator.of(context).pushNamed('/ProfileScreen');
+              Navigator.of(context).pushNamed('/LanguageScreen');
             },
             title: Text('Idioma',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Icon(Icons.navigate_next),

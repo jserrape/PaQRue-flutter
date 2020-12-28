@@ -8,6 +8,7 @@ class SharedPreferencesHelper{
   final String _UserName = "userName";
   final String _UserEmail = "userEmail";
   final String _AllowNotification = "allowNotification";
+  final String _AppLanguage = "language";
 
   /// Returns the user's decision to allow notifications
   Future<bool> getAllowNotification() async{
@@ -68,4 +69,17 @@ class SharedPreferencesHelper{
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.setBool(_ShowIntroduccitionScreens,value);
   }
+
+  /// Returns the app language
+  Future<String> getAppLanguage() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_AppLanguage) ?? "ES";
+  }
+
+  /// Save the app language
+  Future<bool> setAppLanguage(String value) async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(_AppLanguage, value);
+  }
+
 }
