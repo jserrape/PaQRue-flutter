@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:history_maker/src/screens/introduction/careful.dart';
 
+import '../../../app_localizations.dart';
+
 class welcome extends StatefulWidget {
   welcome({Key key, this.title}) : super(key: key);
 
@@ -35,7 +37,7 @@ class _welcomeState extends State<welcome> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          '¡Qué ganas de empezar!',
+          AppLocalizations.of(context).translate('welcome_button'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -46,7 +48,7 @@ class _welcomeState extends State<welcome> {
     return Column(
       children: <Widget>[
         Text(
-          'Hay decenas de parques que... Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s',
+          AppLocalizations.of(context).translate('welcome_text'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
@@ -61,7 +63,7 @@ class _welcomeState extends State<welcome> {
     return Column(
       children: <Widget>[
         Text(
-          '¡Bienvenido!',
+          AppLocalizations.of(context).translate('welcome_title'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30),
         ),

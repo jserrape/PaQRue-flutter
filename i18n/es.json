@@ -1,0 +1,18 @@
+{
+	"creating_park": "Creando parques para disfrutar",
+	"welcome_title": "¡Bienvenido!",
+	"welcome_text": "Hay decenas de parques que... Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s",
+	"welcome_button": "¡Qué ganas de empezar!",
+	"bluetooth_title": "Uso de Bluetooth",
+	"bluetooth_text": "En ocasiones deberás hacer uso de tu Bluetooth para detectar localizar elementos del entorno",
+	"bluetooth_button": "¡Empecemos!",
+	"camera_title": "¡Escaneo de QR!",
+	"camera_text": "Harás uso de tu cámara para escanear códigos QR para superar pruebas y obtener información",
+	"camera_button": "¡Por supuesto!",
+	"careful_title": "¡Ten cuidado!",
+	"careful_text": "Como cualquier actividad en el exterior debes tener cuidado. Ten la vista en el frente mientras descubres tu entorno",
+	"careful_button": "¡Claro!",
+	"location_title": "Geoposicionamiento",
+	"location_text": "PaQRue hará uso de tu posición GPS para poder mostrarte dónde te encuentras así como tus objetivos",
+	"location_button": "¡Estupendo!"
+}

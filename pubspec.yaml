@@ -16,11 +16,8 @@ dependencies:
   google_fonts: ^1.1.1
   shared_preferences: ^0.4.3
   cupertino_icons: ^0.1.3
-
-dev_dependencies:
-  flutter_test:
+  flutter_localizations:
     sdk: flutter
-
 
 flutter:
   uses-material-design: true
@@ -28,7 +25,8 @@ flutter:
   assets:
     - assets/google-logo.png
     - assets/facebook-logo.png
-     #- images/a_dot_ham.jpeg
+    - i18n/en.json
+    - i18n/es.json
 
   # fonts:
   #   - family: Schyler

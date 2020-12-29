@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_maker/src/screens/introduction/camera.dart';
-import 'package:history_maker/src/screens/login/signup.dart';
+
+import '../../../app_localizations.dart';
 
 class location extends StatefulWidget {
   location({Key key, this.title}) : super(key: key);
@@ -36,7 +36,7 @@ class _locationState extends State<location> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          '¡Estupendo!',
+          AppLocalizations.of(context).translate('location_button'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -47,7 +47,7 @@ class _locationState extends State<location> {
     return Column(
       children: <Widget>[
         Text(
-          'PaQRue hará uso de tu posición GPS para poder mostrarte dónde te encuentras así como tus objetivos',
+          AppLocalizations.of(context).translate('location_text'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
@@ -62,7 +62,7 @@ class _locationState extends State<location> {
     return Column(
       children: <Widget>[
         Text(
-          'Geoposicionamiento',
+          AppLocalizations.of(context).translate('location_title'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30),
         ),

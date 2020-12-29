@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_maker/src/screens/introduction/bluetooth.dart';
-import 'package:history_maker/src/screens/introduction/location.dart';
-import 'package:history_maker/src/screens/login/signup.dart';
+
+import '../../../app_localizations.dart';
 
 class camera extends StatefulWidget {
   camera({Key key, this.title}) : super(key: key);
@@ -37,7 +36,7 @@ class _cameraState extends State<camera> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          '¡Por supuesto!',
+          AppLocalizations.of(context).translate('camera_button'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -48,7 +47,7 @@ class _cameraState extends State<camera> {
     return Column(
       children: <Widget>[
         Text(
-          'Harás uso de tu cámara para escanear códigos QR para superar pruebas y obtener información',
+          AppLocalizations.of(context).translate('camera_text'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
@@ -63,7 +62,7 @@ class _cameraState extends State<camera> {
     return Column(
       children: <Widget>[
         Text(
-          '¡Escaneo de QR!',
+          AppLocalizations.of(context).translate('camera_title'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30),
         ),

@@ -3,6 +3,8 @@ import 'package:history_maker/src/screens/introduction/location.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
+import '../../../../app_localizations.dart';
+
 class ProfilePage extends StatefulWidget {
   ProfilePage({Key key, this.title}) : super(key: key);
 
@@ -49,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Navigator.of(context).pushNamed('/NameScreen');
             },
-            title: Text('Nombre',style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(AppLocalizations.of(context).translate('first_string'),style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Text(_UserName),
           ),
         ),

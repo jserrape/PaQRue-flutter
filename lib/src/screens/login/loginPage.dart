@@ -10,6 +10,7 @@ import 'package:history_maker/src/util/Visual.dart';
 import 'package:http/http.dart' as http;
 import 'package:history_maker/src/services/UserServices.dart' as UserServices;
 
+import '../../../app_localizations.dart';
 import '../../Widget/bezierContainer.dart';
 
 class LoginPage extends StatefulWidget {
@@ -119,9 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-        child: Text(
-          'Iniciar sesión',
-          style: TextStyle(fontSize: 20, color: Colors.white),
+        child: Text('Iniciar sesión', style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
     );

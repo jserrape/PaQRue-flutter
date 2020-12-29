@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_maker/src/screens/introduction/location.dart';
-import 'package:history_maker/src/screens/login/signup.dart';
+
+import '../../../app_localizations.dart';
 
 class careful extends StatefulWidget {
   careful({Key key, this.title}) : super(key: key);
@@ -36,7 +36,7 @@ class _carefulState extends State<careful> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          '¡Claro!',
+          AppLocalizations.of(context).translate('careful_button'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -47,7 +47,7 @@ class _carefulState extends State<careful> {
     return Column(
       children: <Widget>[
         Text(
-          'Como cualquier actividad en el exterior debes tener cuidado. Ten la vista en el frente mientras descubres tu entorno',
+          AppLocalizations.of(context).translate('careful_text'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
@@ -62,7 +62,7 @@ class _carefulState extends State<careful> {
     return Column(
       children: <Widget>[
         Text(
-          '¡Ten cuidado!',
+          AppLocalizations.of(context).translate('careful_title'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30),
         ),

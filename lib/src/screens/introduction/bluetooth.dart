@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:history_maker/src/screens/introduction/location.dart';
-import 'package:history_maker/src/screens/login/loginPage.dart';
-import 'package:history_maker/src/screens/login/signup.dart';
+import 'package:history_maker/app_localizations.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class bluetooth extends StatefulWidget {
   bluetooth({Key key, this.title}) : super(key: key);
@@ -40,7 +37,7 @@ class _bluetoothState extends State<bluetooth> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          '¡Empecemos!',
+          AppLocalizations.of(context).translate('bluetooth_button'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -60,7 +57,7 @@ class _bluetoothState extends State<bluetooth> {
     return Column(
       children: <Widget>[
         Text(
-          'En ocasiones deberás hacer uso de tu Bluetooth para detectar localizar elementos del entorno',
+          AppLocalizations.of(context).translate('bluetooth_text'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
         ),
@@ -75,7 +72,7 @@ class _bluetoothState extends State<bluetooth> {
     return Column(
       children: <Widget>[
         Text(
-          'Uso de Bluetooth',
+          AppLocalizations.of(context).translate('bluetooth_title'),
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 30),
         ),

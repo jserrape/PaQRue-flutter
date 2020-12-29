@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:history_maker/app_localizations.dart';
 import 'package:history_maker/src/screens/introduction/bluetooth.dart';
 import 'package:history_maker/src/screens/introduction/camera.dart';
 import 'package:history_maker/src/screens/introduction/careful.dart';
@@ -27,6 +29,32 @@ import 'src/screens/main/more/profile/NamePage.dart';
 void main() {
   runApp(new MaterialApp(
     home: new SplashScreen(),
+    supportedLocales: [
+      Locale('es', 'ES'),
+      Locale('en', 'US'),
+      Locale('en', 'GB'),
+    ],
+    // These delegates make sure that the localization data for the proper language is loaded
+    localizationsDelegates: [
+      // A class which loads the translations from JSON files
+      AppLocalizations.delegate,
+      // Built-in localization of basic text for Material widgets
+      GlobalMaterialLocalizations.delegate,
+      // Built-in localization for text direction LTR/RTL
+      GlobalWidgetsLocalizations.delegate,
+    ],
+    // Returns a locale which will be used by the app
+    localeResolutionCallback: (locale, supportedLocales) {
+      // Check if the current device locale is supported
+      for (var supportedLocale in supportedLocales) {
+        if (supportedLocale.languageCode == locale.languageCode && supportedLocale.countryCode == locale.countryCode) {
+          return supportedLocale;
+        }
+      }
+      // If the locale of the device is not supported, use the first one
+      // from the list (English, in this case).
+      return supportedLocales.first;
+    },
     // https://vignesh-prakash.medium.com/flutter-splash-screen-84fb0307ac55
     routes: <String, WidgetBuilder>{
       '/WelcomeScreen': (BuildContext context) => new welcome(),
@@ -159,7 +187,7 @@ class _SplashScreenState extends State {
                           padding: EdgeInsets.only(top: 20.0),
                         ),
                         Text(
-                          "Creando parques para disfrutar",
+                          AppLocalizations.of(context).translate('creating_park'),
                           softWrap: true,
                           textAlign: TextAlign.center,
                           style: TextStyle(
