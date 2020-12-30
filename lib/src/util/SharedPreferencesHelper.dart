@@ -70,16 +70,5 @@ class SharedPreferencesHelper{
     return prefs.setBool(_ShowIntroduccitionScreens,value);
   }
 
-  /// Returns the app language
-  Future<String> getAppLanguage() async{
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(_AppLanguage) ?? "ES";
-  }
-
-  /// Save the app language
-  Future<bool> setAppLanguage(String value) async{
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setString(_AppLanguage, value);
-  }
 
 }

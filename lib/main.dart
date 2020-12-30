@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:history_maker/app_localizations.dart';
 import 'package:history_maker/src/screens/introduction/bluetooth.dart';
 import 'package:history_maker/src/screens/introduction/camera.dart';
@@ -12,42 +11,49 @@ import 'package:history_maker/src/screens/introduction/welcome.dart';
 import 'package:history_maker/src/screens/login/forgetPassword.dart';
 import 'package:history_maker/src/screens/login/loginPage.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
-import 'package:history_maker/src/screens/main/DiscoverPage.dart';
+import 'package:history_maker/src/screens/main/BottonNavigatinPage.dart';
 import 'package:history_maker/src/screens/main/more/BlogPage.dart';
 import 'package:history_maker/src/screens/main/more/HelpPage.dart';
 import 'package:history_maker/src/screens/main/more/ProfilePage.dart';
 import 'package:history_maker/src/screens/main/more/TermsPage.dart';
-import 'package:history_maker/src/screens/main/more/profile/LanguagePage.dart';
+import 'package:history_maker/src/screens/main/more/profile/PrivacyPage.dart';
+import 'package:history_maker/src/theme/color/light_color.dart';
+import 'package:history_maker/src/theme/theme.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 import 'package:history_maker/src/util/constants.dart' as Constants;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'src/screens/main/more/profile/ChangePassPage.dart';
 import 'src/screens/main/more/profile/EmailPage.dart';
 import 'src/screens/main/more/profile/NamePage.dart';
 
+import 'package:flutter/services.dart';
+
 void main() {
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light
+  ));
+
   runApp(new MaterialApp(
+    //theme: AppTheme.lightTheme,
     home: new SplashScreen(),
     supportedLocales: [
-      Locale('es', 'ES'),
-      Locale('en', 'US'),
-      Locale('en', 'GB'),
+      Locale('es'),
+      Locale('en'),
     ],
-    // These delegates make sure that the localization data for the proper language is loaded
-    localizationsDelegates: [
-      // A class which loads the translations from JSON files
-      AppLocalizations.delegate,
-      // Built-in localization of basic text for Material widgets
-      GlobalMaterialLocalizations.delegate,
-      // Built-in localization for text direction LTR/RTL
-      GlobalWidgetsLocalizations.delegate,
+    localizationsDelegates: [ // These delegates make sure that the localization data for the proper language is loaded
+      AppLocalizations.delegate, // A class which loads the translations from JSON files
+      GlobalMaterialLocalizations.delegate, // Built-in localization of basic text for Material widgets
+      GlobalWidgetsLocalizations.delegate, // Built-in localization for text direction LTR/RTL
     ],
     // Returns a locale which will be used by the app
     localeResolutionCallback: (locale, supportedLocales) {
       // Check if the current device locale is supported
       for (var supportedLocale in supportedLocales) {
-        if (supportedLocale.languageCode == locale.languageCode && supportedLocale.countryCode == locale.countryCode) {
+        if (supportedLocale.languageCode == locale.languageCode /*&& supportedLocale.countryCode == locale.countryCode*/) {
           return supportedLocale;
         }
       }
@@ -65,16 +71,15 @@ void main() {
       '/LoginScreen': (BuildContext context) => new LoginPage(),
       '/SignupScreen': (BuildContext context) => new SignUpPage(),
       '/ForgetPassScreen': (BuildContext context) => new forgetPassword(),
-      '/DiscoverScreen': (BuildContext context) => new DiscoverPage(),
+      '/DiscoverScreen': (BuildContext context) => new BottonNavigationPage(),
       '/ProfileScreen': (BuildContext context) => new ProfilePage(),
       '/BlogScreen': (BuildContext context) => new BlogPage(),
       '/HelpScreen': (BuildContext context) => new HelpPage(),
       '/TermsScreen': (BuildContext context) => new TermsPage(),
       '/NameScreen': (BuildContext context) => new NamePage(),
       '/EmailScreen': (BuildContext context) => new EmailPage(),
-      '/LanguageScreen': (BuildContext context) => new LanguagePage(),
-      //'/TermsScreen': (BuildContext context) => new TermsPage(),
-      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      '/ChangePassScreen': (BuildContext context) => new ChangePassPage(),
+      '/PrivacyScreen': (BuildContext context) => new PrivacyPage(),
       //'/TermsScreen': (BuildContext context) => new TermsPage(),
     },
   ));
@@ -141,7 +146,7 @@ class _SplashScreenState extends State {
             fit: StackFit.expand,
             children: [
               Container(
-                decoration: BoxDecoration(color: Colors.orangeAccent),
+                decoration: BoxDecoration(color: LightColor.background_orange),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,

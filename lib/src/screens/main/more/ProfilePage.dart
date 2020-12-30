@@ -51,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Navigator.of(context).pushNamed('/NameScreen');
             },
-            title: Text(AppLocalizations.of(context).translate('first_string'),style: TextStyle(fontWeight: FontWeight.bold)),
+            title: Text('Nombre',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Text(_UserName),
           ),
         ),
@@ -71,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              //Navigator.of(context).pushNamed('/HelpScreen');
+              Navigator.of(context).pushNamed('/ChangePassScreen');
             },
             title: Text('Cambiar contraseña',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Icon(Icons.navigate_next),
@@ -103,20 +103,9 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
-              //Navigator.of(context).pushNamed('/ProfileScreen');
+              Navigator.of(context).pushNamed('/PrivacyScreen');
             },
             title: Text('Privacidad',style: TextStyle(fontWeight: FontWeight.bold)),
-            trailing: Icon(Icons.navigate_next),
-          ),
-        ),
-        Divider(height: 0.1,color: Colors.black38),
-        Ink(
-          color: Colors.white,
-          child: ListTile(
-            onTap: () {
-              Navigator.of(context).pushNamed('/LanguageScreen');
-            },
-            title: Text('Idioma',style: TextStyle(fontWeight: FontWeight.bold)),
             trailing: Icon(Icons.navigate_next),
           ),
         ),

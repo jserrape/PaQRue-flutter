@@ -1,53 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:history_maker/src/screens/introduction/bluetooth.dart';
-import 'package:history_maker/src/screens/introduction/location.dart';
-import 'package:history_maker/src/screens/login/signup.dart';
-import 'package:history_maker/src/screens/main/MorePage.dart';
-import 'package:history_maker/src/screens/main/PlaceholderWidget.dart';
 
 class DiscoverPage extends StatefulWidget {
+  DiscoverPage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
   @override
-  State<StatefulWidget> createState() {
-    return _DiscoverPageState();
-  }
+  _DiscoverPageState createState() => _DiscoverPageState();
 }
 
 class _DiscoverPageState extends State<DiscoverPage> {
-  int _currentIndex = 0;
-  final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
-    PlaceholderWidget(Colors.deepOrange),
-    MorePage()
-  ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.accessible_forward),
-            title: Text('Descubrir'),
+      backgroundColor: Color(0xfff1f2f4),
+      appBar: AppBar(
+        //title: Text('Title 1'),
+        centerTitle: true,
+        flexibleSpace: FlexibleSpaceBar(
+          title:  Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              const Text("Jaén", textAlign: TextAlign.center,),
+              const Text("A menos de 3Km", style: TextStyle(fontSize: 12.0),textAlign: TextAlign.center,),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_location),
-            title: Text('Parque'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.more_horiz),
-              title: Text('Más')
-          )
-        ],
+          centerTitle: true,
+        ),
+        backgroundColor: Colors.orangeAccent,
+      ),
+      body: Container(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
-  }
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 }
