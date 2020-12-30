@@ -5,6 +5,8 @@ import 'package:history_maker/src/util/Visual.dart';
 import 'package:history_maker/src/services/UserServices.dart' as UserServices;
 import 'package:http/http.dart' as http;
 
+import '../../../app_localizations.dart';
+
 class forgetPassword extends StatefulWidget {
   forgetPassword({Key key, this.title}) : super(key: key);
 
@@ -55,7 +57,7 @@ class _forgetPasswordState extends State<forgetPassword> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                content: Text("Formato del email incorrecto"),
+                content: Text(AppLocalizations.of(context).translate('email_formar_incorrect')),
               );
             },
           );
@@ -65,7 +67,7 @@ class _forgetPasswordState extends State<forgetPassword> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                content: Text("Se ha enviado un correo electronico para el cambio de contraseña"),
+                content: Text(AppLocalizations.of(context).translate('email_change_pass')),
               );
             },
           );
@@ -89,7 +91,7 @@ class _forgetPasswordState extends State<forgetPassword> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          'Recordar contraseña',
+          AppLocalizations.of(context).translate('remember_pass'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -105,7 +107,7 @@ class _forgetPasswordState extends State<forgetPassword> {
     return Column(
       children: <Widget>[
         Text(
-          'Ingrese el correo electrónico para recordar la contraseña',
+          AppLocalizations.of(context).translate('remember_pass_text'),
           textAlign: TextAlign.center,
           //overflow: TextOverflow.ellipsis,
           style: TextStyle(),
@@ -113,7 +115,7 @@ class _forgetPasswordState extends State<forgetPassword> {
         SizedBox(
           height: 20,
         ),
-        _entryField(controllerEmail, "Email")
+        _entryField(controllerEmail, AppLocalizations.of(context).translate('email'))
       ],
     );
   }

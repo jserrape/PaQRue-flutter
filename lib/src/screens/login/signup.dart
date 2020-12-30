@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:history_maker/src/services/UserServices.dart' as UserServices;
 
+import '../../../app_localizations.dart';
 import 'loginPage.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -52,7 +53,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<http.Response> addUser(User user) async {
     final response = await UserServices.postUser(user);
-    //return User.fromJson(json.decode(response.body));
     return response;
   }
 
@@ -68,12 +68,12 @@ class _SignUpPageState extends State<SignUpPage> {
           http.Response response = await addUser(user);
           String mensaje = "";
           if(response.statusCode == 201){
-            mensaje = "Registro completo";
+            mensaje = AppLocalizations.of(context).translate('register_complete');
             controllerEmail.clear();
             controllerPassword.clear();
             controllerNombre.clear();
           }else{
-            mensaje = "Ya existe una cuenta con ese correo electrónico";
+            mensaje = AppLocalizations.of(context).translate('account_exist');
           }
 
           return await showDialog(
@@ -89,13 +89,13 @@ class _SignUpPageState extends State<SignUpPage> {
         } else {
           String error = "Error sin definir";
           if (emailValid && !passwordValid) {
-            error = "Formato de la contraseña incorrecto";
+            error = AppLocalizations.of(context).translate('error_password_format');
           }
           if (!emailValid && passwordValid) {
-            error = "Formato del email incorrecto";
+            error = AppLocalizations.of(context).translate('email_formar_incorrect');
           }
           if (!emailValid && !passwordValid) {
-            error = "Formato del email y contraseña incorrectos";
+            error = AppLocalizations.of(context).translate('pass_email_format_error');
           }
           return showDialog(
             context: context,
@@ -125,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
         child: Text(
-          'Registrarse ahora',
+          AppLocalizations.of(context).translate('register_now'),
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
@@ -145,14 +145,14 @@ class _SignUpPageState extends State<SignUpPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '¿Ya tienes una cuenta?',
+              AppLocalizations.of(context).translate('already_have_account'),
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
-              'Iniciar sesión',
+              AppLocalizations.of(context).translate('log_in'),
               style: TextStyle(
                   color: Color(0xfff79c4f),
                   fontSize: 13,
@@ -167,9 +167,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField(controllerNombre, "Nombre"),
-        _entryField(controllerEmail, "Email *"),
-        _entryField(controllerPassword, "Contraseña *", isPassword: true),
+        _entryField(controllerNombre, AppLocalizations.of(context).translate('name')),
+        _entryField(controllerEmail, AppLocalizations.of(context).translate('email') + " *"),
+        _entryField(controllerPassword, AppLocalizations.of(context).translate('password') + " *", isPassword: true),
       ],
     );
   }

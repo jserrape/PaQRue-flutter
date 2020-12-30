@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                content: Text("Formato del email o contraseña no válido"),
+                content: Text(AppLocalizations.of(context).translate('format_no_valid_1')),
               );
             },
           );
@@ -91,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
               builder: (context) {
                 return AlertDialog(
-                  content: Text("Email o contraseña incorrectos"),
+                  content: Text(AppLocalizations.of(context).translate('pass_error')),
                 );
               },
             );
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 colors: [Color(0xfffbb448), Color(0xfff7892b)])),
-        child: Text('Iniciar sesión', style: TextStyle(fontSize: 20, color: Colors.white),
+        child: Text(AppLocalizations.of(context).translate('log_in'), style: TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
     );
@@ -142,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Text('o'),
+          Text(AppLocalizations.of(context).translate('or')),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -193,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                     topRight: Radius.circular(5)),
               ),
               alignment: Alignment.center,
-              child: Text('Iniciar sesión con Facebook',
+              child: Text(AppLocalizations.of(context).translate('log_in_facebook'),
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -239,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                     topRight: Radius.circular(5)),
               ),
               alignment: Alignment.center,
-              child: Text('Iniciar sesión con Google',
+              child: Text(AppLocalizations.of(context).translate('log_in_google'),
                   style: TextStyle(
                       color: Colors.grey,
                       fontSize: 18,
@@ -264,14 +264,14 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              '¿No tienes una cuenta?',
+              AppLocalizations.of(context).translate('no_account'),
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
             ),
             SizedBox(
               width: 10,
             ),
             Text(
-              'Registrarse',
+              AppLocalizations.of(context).translate('register'),
               style: TextStyle(
                   color: Color(0xfff79c4f),
                   fontSize: 13,
@@ -287,8 +287,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField(controllerEmail, "Email"),
-        _entryField(controllerPassword, "Contraseña", isPassword: true),
+        _entryField(controllerEmail, AppLocalizations.of(context).translate('email')),
+        _entryField(controllerPassword, AppLocalizations.of(context).translate('password'), isPassword: true),
       ],
     );
   }
@@ -320,7 +320,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
                       alignment: Alignment.centerRight,
-                      child: Text('¿Se te olvidó tu contraseña?',
+                      child: Text(AppLocalizations.of(context).translate('forget_pass'),
                           style: TextStyle(
                               color: Color(0xfff79c4f),
                               fontSize: 13,
