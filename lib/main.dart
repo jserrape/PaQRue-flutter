@@ -39,6 +39,7 @@ void main() {
 
   runApp(new MaterialApp(
     //theme: AppTheme.lightTheme,
+    debugShowCheckedModeBanner: false,
     home: new SplashScreen(),
     supportedLocales: [
       Locale('es'),

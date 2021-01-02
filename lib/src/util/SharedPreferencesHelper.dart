@@ -8,7 +8,7 @@ class SharedPreferencesHelper{
   final String _UserName = "userName";
   final String _UserEmail = "userEmail";
   final String _AllowNotification = "allowNotification";
-  final String _AppLanguage = "language";
+  final String _UserPosition = "userPosition";
 
   /// Returns the user's decision to allow notifications
   Future<bool> getAllowNotification() async{
@@ -70,5 +70,15 @@ class SharedPreferencesHelper{
     return prefs.setBool(_ShowIntroduccitionScreens,value);
   }
 
+  /// Returns the last user position
+  Future<String> getUserPosition() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_UserPosition) ?? null;
+  }
 
+  /// Save the user position
+  Future<bool> setUserPosition(String value) async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(_UserPosition, value);
+  }
 }
