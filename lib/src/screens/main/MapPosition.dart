@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -13,10 +12,11 @@ class MapPosition extends StatefulWidget {
 class _MapPositionState extends State<MapPosition> {
 
   MapType _defaultMapType = MapType.normal;
-  CameraPosition _initialPosition = CameraPosition(target: LatLng(26.8206, 30.8025));
+  CameraPosition _initialPosition = CameraPosition(target: LatLng(40.4167047, -3.7035825), zoom: 15.0,);
   Completer<GoogleMapController> _controller = Completer();
   LatLng _lastMapPosition;
 
+  ///Obtain the user position
   void _getUserLocation() async {
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print('position.latitude');
@@ -24,14 +24,24 @@ class _MapPositionState extends State<MapPosition> {
     print(position.longitude);
   }
 
+  ///Modify the map type
   void _changeMapType() {
     setState(() {
       _defaultMapType = _defaultMapType == MapType.normal ? MapType.satellite : MapType.normal;
     });
   }
 
-  void _onMapCreated(GoogleMapController controller) {
+  ///Save the center of the map
+  void _onCameraMove(CameraPosition position) {
+    print(position.target);
+    _lastMapPosition = position.target;
+  }
+
+  ///Move the camera to the center when the map is created
+  Future<void> _onMapCreated(GoogleMapController controller) async {
     _controller.complete(controller);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    controller.moveCamera(CameraUpdate.newLatLng(LatLng(position.latitude,position.longitude)));
   }
 
   @override
@@ -78,10 +88,8 @@ class _MapPositionState extends State<MapPosition> {
 
             Align(
               alignment: Alignment.bottomCenter,
-
               child:  Container(
                 padding: EdgeInsets.symmetric(vertical: 40,horizontal:MediaQuery.of(context).size.width*0.25),
-                //padding: EdgeInsets.symmetric(vertical: 40,horizontal: 100),
                 color: Colors.white,
                 child: Row(
                   children: <Widget>[
@@ -94,12 +102,6 @@ class _MapPositionState extends State<MapPosition> {
             ),
           ]),
     );
-  }
-
-  void _onCameraMove(CameraPosition position) {
-    print('camera move');
-    print(position.target);
-    _lastMapPosition = position.target;
   }
 
   Widget _submitButton() {

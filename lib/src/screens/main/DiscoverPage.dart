@@ -32,18 +32,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
       var long = position.longitude;
 
       await Geolocator().placemarkFromCoordinates(lat, long).then((result) {
+        //TODO ¿qué pasa si no estoy en una ciudad?
         geo.Placemark placeMark = result[0];
-        String address = placeMark.locality + "," + placeMark.country;
+        String address = placeMark.locality + ", " + placeMark.country;
         String srtJson = '{"latitud":"$lat","longitud":"$long","adress":"$address"}';
-        preferencesHelper.setUserPosition(srtJson);
-
-        print(srtJson);
+        preferencesHelper.setUserPosition(srtJson); //Guarda las coordenadas y direccion
 
         setState(() {
           ciudad = address;
         });
-
-        //TODO guardar coordenadas y direccion
       });
     }else{ //Si no es la primera vez la buscará en las preferencias
       print("BUSCO LA UBICACION EN LAS PREFERENCES");
