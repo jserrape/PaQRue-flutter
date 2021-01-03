@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart' as geo;
 
 class DiscoverPage extends StatefulWidget {
@@ -19,6 +18,7 @@ class DiscoverPage extends StatefulWidget {
 class _DiscoverPageState extends State<DiscoverPage> {
 
   var ciudad = "-";
+  double width;
 
   ///Establece desde qué punto central va a buscar los parques. Seleccionándolo en el menú se podrá cambiar y elegir otro punto
   void establecerPuntoBusqueda() async {
@@ -52,9 +52,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
         ciudad = posJson['adress'];
       });
     }
-
-
-
   }
 
   @override
@@ -65,10 +62,10 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color(0xfff1f2f4),
       appBar: AppBar(
-        //title: Text('Title 1'),
         centerTitle: true,
         flexibleSpace: FlexibleSpaceBar(
           title:  Column(
@@ -86,22 +83,83 @@ class _DiscoverPageState extends State<DiscoverPage> {
         ),
         backgroundColor: Colors.orangeAccent,
       ),
-      body: Container(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+        body: SingleChildScrollView(
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  _courseList()
+                ],
+              ),
+            )
+        )
+    );
+  }
 
-                  ],
+  Widget _courseList() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+        child: Column(
+          children: <Widget>[
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+            _courceInfo(),
+            Divider(thickness: 1, endIndent: 20, indent: 20),
+          ],
+      ),
+    );
+  }
+
+  Widget _courceInfo() {
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        child: InkWell(
+          onTap: () => print("ciao"),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                ),
+                child: Image.network(
+                    'https://placeimg.com/640/480/any',
+                    height: 120,
+                    fit:BoxFit.fill
                 ),
               ),
-            ),
-          ],
+              ListTile(
+                visualDensity: VisualDensity(horizontal: 0, vertical: -3),
+                title: Text('Parque de tu puta casa'),
+                subtitle: Text('9:30 - 21:30 | 2,0 km'),
+                trailing: Icon(Icons.favorite),
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+
+  Widget _circularContainer(double height, Color color,
+      {Color borderColor = Colors.transparent, double borderWidth = 2}) {
+    return Container(
+      height: height,
+      width: height,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+        border: Border.all(color: borderColor, width: borderWidth),
       ),
     );
   }

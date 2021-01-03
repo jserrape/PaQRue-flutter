@@ -10,6 +10,9 @@ const postChangeName = "/rest/usuario/change_user_name";
 const postChangeEmail = "/rest/usuario/change_user_email";
 const postLogUser = "/rest/usuario/login";
 
+// Post parks Services
+const getAllParks = "/rest/park/all";
+
 // Asset Constants
 const googleLogo = "assets/google-logo.png";
 const facebookLogo = "assets/facebook-logo.png";
