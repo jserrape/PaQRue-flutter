@@ -3,8 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
+import 'package:history_maker/src/model/Park.dart';
 
 import 'package:geolocator/geolocator.dart' as geo;
+
+import 'package:http/http.dart' as http;
+import 'package:history_maker/src/services/ParkServices.dart' as ParkServices;
 
 class DiscoverPage extends StatefulWidget {
   DiscoverPage({Key key, this.title}) : super(key: key);
@@ -19,6 +23,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   var ciudad = "-";
   double width;
+  List <Widget> items = [];
 
   ///Establece desde qué punto central va a buscar los parques. Seleccionándolo en el menú se podrá cambiar y elegir otro punto
   void establecerPuntoBusqueda() async {
@@ -54,35 +59,55 @@ class _DiscoverPageState extends State<DiscoverPage> {
     }
   }
 
+  Future<http.Response> solicitarParquesPetition() async {
+    final response = await ParkServices.getAllParks();
+    return response;
+  }
+
+  void solicitarParques() async {
+    http.Response response = await solicitarParquesPetition();
+    var allParks = jsonDecode(((jsonDecode(response.body))['parks'])); //TODOS
+    List <Widget> itemsAux = [];
+    for (var parkJson in allParks) {
+      Park parkObj = new Park(parkJson);
+      print(parkObj);
+      items.add(cardParkNew(parkObj));
+      setState(() {
+        items = itemsAux;
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     establecerPuntoBusqueda();
+    solicitarParques();
   }
 
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Color(0xfff1f2f4),
-      appBar: AppBar(
-        centerTitle: true,
-        flexibleSpace: FlexibleSpaceBar(
-          title:  Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              InkWell(
-                child: Text('$ciudad', textAlign: TextAlign.center),
-                onTap: () {Navigator.of(context).pushNamed('/MapPositionScreen');},
-              ),
-            ],
-          ),
+        backgroundColor: Color(0xfff1f2f4),
+        appBar: AppBar(
           centerTitle: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title:  Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                InkWell(
+                  child: Text('$ciudad', textAlign: TextAlign.center),
+                  onTap: () {Navigator.of(context).pushNamed('/MapPositionScreen');},
+                ),
+              ],
+            ),
+            centerTitle: true,
+          ),
+          backgroundColor: Colors.orangeAccent,
         ),
-        backgroundColor: Colors.orangeAccent,
-      ),
         body: SingleChildScrollView(
             child: Container(
               child: Column(
@@ -98,26 +123,13 @@ class _DiscoverPageState extends State<DiscoverPage> {
   Widget _courseList() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-        child: Column(
-          children: <Widget>[
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-            _courceInfo(),
-            Divider(thickness: 1, endIndent: 20, indent: 20),
-          ],
+      child: Column(
+        children: items,
       ),
     );
   }
 
-  Widget _courceInfo() {
+  Widget cardParkNew(Park parkObj) {
     return Center(
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -132,15 +144,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   topRight: Radius.circular(8.0),
                 ),
                 child: Image.network(
-                    'https://placeimg.com/640/480/any',
+                    parkObj.imagen,
                     height: 120,
                     fit:BoxFit.fill
                 ),
               ),
               ListTile(
                 visualDensity: VisualDensity(horizontal: 0, vertical: -3),
-                title: Text('Parque de tu puta casa'),
-                subtitle: Text('9:30 - 21:30 | 2,0 km'),
+                title: Text(parkObj.nombre),
+                subtitle: Text(parkObj.horario + ' | ' + parkObj.distancia.toString() + ' km'),
                 trailing: Icon(Icons.favorite),
               ),
             ],
