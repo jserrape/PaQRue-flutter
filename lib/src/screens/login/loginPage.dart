@@ -5,7 +5,7 @@ import 'package:history_maker/src/model/User.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 
 import 'package:history_maker/src/util/constants.dart' as Constants;
-import 'package:history_maker/src/util/Visual.dart';
+import 'file:///C:/Users/Juanca/Documents/GitHub/PaQRue-flutter/lib/src/Visual.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:history_maker/src/services/UserServices.dart' as UserServices;

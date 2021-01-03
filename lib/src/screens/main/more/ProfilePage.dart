@@ -103,6 +103,17 @@ class _ProfilePageState extends State<ProfilePage> {
           color: Colors.white,
           child: ListTile(
             onTap: () {
+              //Navigator.of(context).pushNamed('/ProfileScreen');
+            },
+            title: Text('Estilos de mapa',style: TextStyle(fontWeight: FontWeight.bold)),
+            trailing: Icon(Icons.navigate_next),
+          ),
+        ),
+        Divider(height: 0.1,color: Colors.black38),
+        Ink(
+          color: Colors.white,
+          child: ListTile(
+            onTap: () {
               Navigator.of(context).pushNamed('/PrivacyScreen');
             },
             title: Text('Privacidad',style: TextStyle(fontWeight: FontWeight.bold)),

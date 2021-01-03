@@ -12,6 +12,7 @@ import 'package:history_maker/src/screens/login/forgetPassword.dart';
 import 'package:history_maker/src/screens/login/loginPage.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
 import 'package:history_maker/src/screens/main/BottonNavigatinPage.dart';
+import 'package:history_maker/src/screens/main/MapPosition.dart';
 import 'package:history_maker/src/screens/main/more/BlogPage.dart';
 import 'package:history_maker/src/screens/main/more/HelpPage.dart';
 import 'package:history_maker/src/screens/main/more/ProfilePage.dart';
@@ -81,7 +82,7 @@ void main() {
       '/EmailScreen': (BuildContext context) => new EmailPage(),
       '/ChangePassScreen': (BuildContext context) => new ChangePassPage(),
       '/PrivacyScreen': (BuildContext context) => new PrivacyPage(),
-      //'/TermsScreen': (BuildContext context) => new TermsPage(),
+      '/MapPositionScreen': (BuildContext context) => new MapPosition(),
     },
   ));
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:history_maker/src/Widget/bezierContainer.dart';
 import 'package:history_maker/src/model/User.dart';
-import 'package:history_maker/src/util/Visual.dart';
+import 'file:///C:/Users/Juanca/Documents/GitHub/PaQRue-flutter/lib/src/Visual.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -211,7 +211,29 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
             ),
             Positioned(
-                top: 40, left: 0, child: (new Visual()).backButton(context)),
+                top: 40, left: 0, child: backButton()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget backButton() {
+    return InkWell(
+      onTap: () {
+        //Navigator.pop(context);
+        Navigator.of(context).pushReplacementNamed('/LoginScreen');
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
+              child: Icon(Icons.keyboard_arrow_left, color: Colors.black),
+            ),
+            Text(AppLocalizations.of(context).translate('back'),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500))
           ],
         ),
       ),

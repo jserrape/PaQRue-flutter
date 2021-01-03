@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
@@ -16,27 +18,42 @@ class DiscoverPage extends StatefulWidget {
 
 class _DiscoverPageState extends State<DiscoverPage> {
 
+  var ciudad = "-";
+
   ///Establece desde qué punto central va a buscar los parques. Seleccionándolo en el menú se podrá cambiar y elegir otro punto
   void establecerPuntoBusqueda() async {
     SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
 
     String pos = await preferencesHelper.getUserPosition();
     if(pos == null){ //Si es la primera vez, usará la ubicación actual del usuario
+      print("PRIMERA VEZ QUE BUSCO LA UBICACION");
       Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      print('-Coordenadas:');
-      print(position.latitude);
-      print(position.longitude);
+      var lat = position.latitude;
+      var long = position.longitude;
 
-      await Geolocator().placemarkFromCoordinates(position.latitude, position.longitude).then((result) {
+      await Geolocator().placemarkFromCoordinates(lat, long).then((result) {
         geo.Placemark placeMark = result[0];
+        String address = placeMark.locality + "," + placeMark.country;
+        String srtJson = '{"latitud":"$lat","longitud":"$long","adress":"$address"}';
+        preferencesHelper.setUserPosition(srtJson);
 
-        String locality = placeMark.locality;
-        String country = placeMark.country;
-        String address = "${locality}, ${country}";
-        print(address);
+        print(srtJson);
+
+        setState(() {
+          ciudad = address;
+        });
+
+        //TODO guardar coordenadas y direccion
       });
     }else{ //Si no es la primera vez la buscará en las preferencias
+      print("BUSCO LA UBICACION EN LAS PREFERENCES");
+      print(pos);
+      var posJson= json.decode(pos);
+      print(posJson['latitud']);
 
+      setState(() {
+        ciudad = posJson['adress'];
+      });
     }
 
 
@@ -51,7 +68,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Color(0xfff1f2f4),
       appBar: AppBar(
@@ -63,8 +79,10 @@ class _DiscoverPageState extends State<DiscoverPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Text("Posición actual", textAlign: TextAlign.center,),
-              const Text("A menos de 3Km", style: TextStyle(fontSize: 12.0),textAlign: TextAlign.center,),
+              InkWell(
+                child: Text('$ciudad', textAlign: TextAlign.center),
+                onTap: () {Navigator.of(context).pushNamed('/MapPositionScreen');},
+              ),
             ],
           ),
           centerTitle: true,

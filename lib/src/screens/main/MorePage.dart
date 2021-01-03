@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:history_maker/src/screens/introduction/bluetooth.dart';
 import 'package:history_maker/src/screens/introduction/location.dart';
 import 'package:history_maker/src/screens/login/signup.dart';
-import 'package:history_maker/src/util/Visual.dart';
+import 'file:///C:/Users/Juanca/Documents/GitHub/PaQRue-flutter/lib/src/Visual.dart';
 
 class MorePage extends StatefulWidget {
   MorePage({Key key, this.title}) : super(key: key);
