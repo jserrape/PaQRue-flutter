@@ -59,13 +59,15 @@ class _DiscoverPageState extends State<DiscoverPage> {
     }
   }
 
-  Future<http.Response> solicitarParquesPetition() async {
-    final response = await ParkServices.getAllParks();
+  Future<http.Response> solicitarParquesPetition(Position position) async {
+    final response = await ParkServices.getLimit_distanceParks(position);
     return response;
   }
 
   void solicitarParques() async {
-    http.Response response = await solicitarParquesPetition();
+    /**
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    http.Response response = await solicitarParquesPetition(position);
     var allParks = jsonDecode(((jsonDecode(response.body))['parks'])); //TODOS
     List <Widget> itemsAux = [];
     for (var parkJson in allParks) {
@@ -76,6 +78,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
         items = itemsAux;
       });
     }
+        */
   }
 
   @override

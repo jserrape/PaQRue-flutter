@@ -10,6 +10,7 @@ import 'package:history_maker/src/util/constants.dart' as Constants;
 
 Future<http.Response> postUser(User user) async {
   String url = Constants.apiBaseURL + Constants.postUser;
+  print(url);
   try {
     final response = await http.post(
       url,

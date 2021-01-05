@@ -67,7 +67,7 @@ class _SignUpPageState extends State<SignUpPage> {
           User user = new User(controllerEmail.text,controllerNombre.text.trim(), controllerPassword.text, 0);
           http.Response response = await addUser(user);
           String mensaje = "";
-          if(response.statusCode == 201){
+          if(response.statusCode == 200){
             mensaje = AppLocalizations.of(context).translate('register_complete');
             controllerEmail.clear();
             controllerPassword.clear();
@@ -83,9 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 content: Text(mensaje),
               );
             },
-          ).then((val){
-            Navigator.pop(context);
-          });
+          );
         } else {
           String error = "Error sin definir";
           if (emailValid && !passwordValid) {

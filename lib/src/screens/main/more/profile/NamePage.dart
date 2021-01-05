@@ -44,7 +44,7 @@ class _NamePageState extends State<NamePage> {
     print(response.statusCode);
     print(response.body);
 
-    if(response.statusCode == 201){
+    if(response.statusCode == 200){
       SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
       preferencesHelper.setUserName(_controller.text);
       initialName = _controller.text;

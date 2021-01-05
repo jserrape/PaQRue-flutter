@@ -85,8 +85,14 @@ class _LoginPageState extends State<LoginPage> {
           http.Response response = await loginUser(user);
           print(response);
           print(response.statusCode);
-          print(response.body);
-          if(response.statusCode == 400){
+          //print(response.body);
+          print((jsonDecode(response.body))['element']);
+          if(response.statusCode == 200){
+            //Guardar datos del usuario
+            _saveUser((jsonDecode(response.body))['element']);
+            //Pasar a la siguiente pantalla
+            Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
+          }else{
             return await showDialog(
               context: context,
               builder: (context) {
@@ -95,11 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                 );
               },
             );
-          }else{
-            //Guardar datos del usuario
-            _saveUser(jsonDecode((jsonDecode(response.body))['user']));
-            //Pasar a la siguiente pantalla
-            Navigator.of(context).pushReplacementNamed('/DiscoverScreen');
           }
         }
       },
