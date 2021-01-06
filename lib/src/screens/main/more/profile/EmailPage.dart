@@ -38,7 +38,7 @@ class _EmailPageState extends State<EmailPage> {
     print(response.statusCode);
     print(response.body);
 
-    if(response.statusCode == 201){
+    if(response.statusCode == 200){
       SharedPreferencesHelper preferencesHelper = new SharedPreferencesHelper();
       preferencesHelper.setUserEmail(_controller.text);
       initialEmail = _controller.text;

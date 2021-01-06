@@ -4,7 +4,8 @@ class Park {
   String descripcion;
   String latitud;
   String longitud;
-  String imagen;
+  String imagenLista;
+  String imagenGrande;
   String horario;
   String direccion;
   double distancia;
@@ -15,7 +16,8 @@ class Park {
     this.descripcion = json['descripcion'];
     this.latitud = json['latitud'];
     this.longitud = json['longitud'];
-    this.imagen = json['imagen'];
+    this.imagenLista = json['imagenLista'];
+    this.imagenGrande = json['imagenGrande'];
     this.horario = json['horario'];
     this.direccion = json['direccion'];
     this.distancia = 0;
@@ -25,6 +27,6 @@ class Park {
 
   @override
   String toString() {
-    return 'Park{id: $id, nombre: $nombre, descripcion: $descripcion, latitud: $latitud, longitud: $longitud, imagen: $imagen, horario: $horario, direccion: $direccion}';
+    return 'Park{id: $id, nombre: $nombre, descripcion: $descripcion, latitud: $latitud, longitud: $longitud, imagenLista: $imagenLista, imagenGrande: $imagenGrande, horario: $horario, direccion: $direccion}';
   }
 }

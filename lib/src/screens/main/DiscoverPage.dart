@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:history_maker/src/screens/main/more/ParkProperties.dart';
 import 'package:history_maker/src/util/SharedPreferencesHelper.dart';
 import 'package:history_maker/src/model/Park.dart';
 
@@ -60,25 +61,35 @@ class _DiscoverPageState extends State<DiscoverPage> {
   }
 
   Future<http.Response> solicitarParquesPetition(Position position) async {
-    final response = await ParkServices.getLimit_distanceParks(position);
+    //final response = await ParkServices.getLimit_distanceParks(position);
+    final response = await ParkServices.getAllParks();
     return response;
   }
 
   void solicitarParques() async {
-    /**
+    print("Solicito los parques");
     Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     http.Response response = await solicitarParquesPetition(position);
-    var allParks = jsonDecode(((jsonDecode(response.body))['parks'])); //TODOS
+    //print((jsonDecode(response.body))['element']);
+    var allParks = (jsonDecode(response.body))['element']; //TODOS
+    print(allParks.length );
     List <Widget> itemsAux = [];
+    int i=0;
+
     for (var parkJson in allParks) {
+      if(i==0){
+        items.add(null);
+        setState(() {
+          items = itemsAux;
+        });
+      }
       Park parkObj = new Park(parkJson);
-      print(parkObj);
       items.add(cardParkNew(parkObj));
       setState(() {
         items = itemsAux;
       });
+      i+=1;
     }
-        */
   }
 
   @override
@@ -137,7 +148,14 @@ class _DiscoverPageState extends State<DiscoverPage> {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: InkWell(
-          onTap: () => print("ciao"),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ParkProperties(id: parkObj.id),
+              ),
+            );
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,  // add this
             children: <Widget>[
@@ -147,7 +165,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   topRight: Radius.circular(8.0),
                 ),
                 child: Image.network(
-                    parkObj.imagen,
+                    parkObj.imagenLista,
                     height: 120,
                     fit:BoxFit.fill
                 ),
